@@ -1,8 +1,9 @@
-# React + Vite
+[Live_link](https://car-hunt-9d4d9.web.app/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Project Feature:
+1. user can register, login or can use google login
+2.  User Can see by brand name
+3. User can search by brand name
+4. user can update or delete a car
+5. user can add to cart
+   
