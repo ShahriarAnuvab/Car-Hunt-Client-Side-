@@ -11,7 +11,7 @@ const Home = () => {
   const [brand, setBrand] = useState([])
 
   useEffect(()=>{
-    fetch('https://car-hunt-server-side-88mdu63zy-shahriaranuvab.vercel.app/brand')
+    fetch('https://car-hunt-server-side-5laah22ye-shahriaranuvab.vercel.app/brand')
     .then(res => res.json())
     .then(data=> setBrand(data))
   },[])

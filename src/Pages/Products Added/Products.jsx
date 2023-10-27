@@ -9,7 +9,7 @@ const Products = ({car, cars, setCars}) => {
 
     const [add, setAdd]= useState(true)
     const handleAddTocart =()=>{
-      fetch("https://car-hunt-server-side-88mdu63zy-shahriaranuvab.vercel.app/cart",{
+      fetch("https://car-hunt-server-side-5laah22ye-shahriaranuvab.vercel.app/cart",{
         method: "POST",
         headers:{
             'content-type' : 'application/json'
@@ -42,7 +42,7 @@ const Products = ({car, cars, setCars}) => {
           confirmButtonText: "Yes, delete it!",
         }).then((result) => {
           if (result.isConfirmed) {
-            fetch(`https://car-hunt-server-side-88mdu63zy-shahriaranuvab.vercel.app/cars/${_id}`, {
+            fetch(`https://car-hunt-server-side-5laah22ye-shahriaranuvab.vercel.app/cars/${_id}`, {
               method: "DELETE",
             })
               .then((res) => res.json())
