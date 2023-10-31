@@ -36,8 +36,8 @@ const UpdateProduct = () => {
       image,
       brandImage,
     };
-    console.log(updatedCar);
-    fetch(`https://car-hunt-server-side-5laah22ye-shahriaranuvab.vercel.app/cars/${_id}`, { 
+
+    fetch(`http://localhost:5000/cars/${_id}`, { 
       method: "PUT",
       headers: {
         "content-type": "application/json",

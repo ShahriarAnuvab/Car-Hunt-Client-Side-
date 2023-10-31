@@ -11,7 +11,7 @@ const Home = () => {
   const [brand, setBrand] = useState([])
 
   useEffect(()=>{
-    fetch('https://car-hunt-server-side-5laah22ye-shahriaranuvab.vercel.app/brand')
+    fetch('http://localhost:5000/brand')
     .then(res => res.json())
     .then(data=> setBrand(data))
   },[])
@@ -61,7 +61,7 @@ const Home = () => {
         ) : (
           <div className="flex justify-center items-center">
             {data.length > 0?   <Link to="/addedproduct">
-              <button className="btn">See All</button>
+              <button className="btn mt-5">See All</button>
             </Link> : '' }
           
           </div>
