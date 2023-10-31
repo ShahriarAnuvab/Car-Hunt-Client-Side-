@@ -20,7 +20,7 @@ const AddProduct = () => {
         const image = form.image.value
         const brandImage = form.brandImage.value
         const newCar = {brand, car, price, rating , category,description, image, brandImage}
-        fetch("http://localhost:5000/cars",{
+        fetch("https://car-hunt-server-side-fy1tbiv9m-shahriaranuvab.vercel.app/cars",{
             method: "POST",
             headers:{
                 'content-type' : 'application/json'

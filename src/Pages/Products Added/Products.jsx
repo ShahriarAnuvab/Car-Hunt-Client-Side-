@@ -9,7 +9,7 @@ const Products = ({car, cars, setCars}) => {
 
     const [add, setAdd]= useState(true)
     const handleAddTocart =()=>{
-      fetch("http://localhost:5000/cart",{
+      fetch("https://car-hunt-server-side-fy1tbiv9m-shahriaranuvab.vercel.app/cart",{
         method: "POST",
         headers:{
             'content-type' : 'application/json'
@@ -42,7 +42,7 @@ const Products = ({car, cars, setCars}) => {
           confirmButtonText: "Yes, delete it!",
         }).then((result) => {
           if (result.isConfirmed) {
-            fetch(`http://localhost:5000/cars/${_id}`, {
+            fetch(`https://car-hunt-server-side-fy1tbiv9m-shahriaranuvab.vercel.app/cars/${_id}`, {
               method: "DELETE",
             })
               .then((res) => res.json())

@@ -28,7 +28,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader :()=> fetch('http://localhost:5000/cars')
+        loader :()=> fetch('https://car-hunt-server-side-fy1tbiv9m-shahriaranuvab.vercel.app/cars')
       },
       {
         path: "/addproduct",
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <PrivateRoute><Cart></Cart></PrivateRoute>,
-        loader: ()=> fetch('http://localhost:5000/cart')
+        loader: ()=> fetch('https://car-hunt-server-side-fy1tbiv9m-shahriaranuvab.vercel.app/cart')
       },
       {
         path: "/login",
@@ -50,18 +50,18 @@ const router = createBrowserRouter([
       {
         path:  "/addedproduct",
         element: <PrivateRoute><ProductsAdded></ProductsAdded></PrivateRoute>,
-        loader :()=> fetch('http://localhost:5000/cars')
+        loader :()=> fetch('https://car-hunt-server-side-fy1tbiv9m-shahriaranuvab.vercel.app/cars')
       },
       {
         path:  "/updateproduct/:id",
         element:<PrivateRoute> <UpdateProduct></UpdateProduct></PrivateRoute>,
-        loader: ({params})=>fetch( `http://localhost:5000/cars/${params.id}`)
+        loader: ({params})=>fetch( `https://car-hunt-server-side-fy1tbiv9m-shahriaranuvab.vercel.app/cars/${params.id}`)
         
       },
      {
       path: `/brand/:brand`,
       element: <PrivateRoute><BrandCars></BrandCars></PrivateRoute>,
-      loader :()=> fetch(`http://localhost:5000/brand`)
+      loader :()=> fetch(`https://car-hunt-server-side-fy1tbiv9m-shahriaranuvab.vercel.app/brand`)
      }
       
     ],
