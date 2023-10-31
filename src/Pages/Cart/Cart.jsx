@@ -3,6 +3,7 @@ import CartItems from "./CartItems";
 
 const Cart = () => {
   const cart = useLoaderData();
+  console.log(cart)
 
   return (
     <div>
