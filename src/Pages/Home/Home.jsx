@@ -20,6 +20,7 @@ const Home = () => {
   brand.forEach((item) => {
     const brand = item.brand;
     const image = item.brandImage;
+    console.log(image)
     if (!brandData[brand]) {
       brandData[brand] = {
         brand: brand,
