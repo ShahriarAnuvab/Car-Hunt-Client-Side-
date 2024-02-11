@@ -3,65 +3,74 @@ import { useState } from "react";
 import Rating from "react-rating";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-const Products = ({car, cars, setCars}) => {
-    const { name, price, rating, image, brand, description, category, _id } =
-    car || {};
 
-    const [add, setAdd]= useState(true)
-    const handleAddTocart =()=>{
-      fetch("https://car-hunt-server-side-fy1tbiv9m-shahriaranuvab.vercel.app/cart",{
-        method: "POST",
-        headers:{
-            'content-type' : 'application/json'
-        },
-        body : JSON.stringify(car)
+const Products = ({ car, cars, setCars }) => {
+  const {
+    name,
+    price,
+    rating,
+    image,
+    brand,
+    description,
+    category,
+    _id,
+    userEmail,
+  } = car || {};
 
+  console.log(car);
+  // console.log(user.email);
+
+  const [add, setAdd] = useState(true);
+  const handleAddTocart = () => {
+    fetch("http://localhost:5000/cart", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(car),
     })
-    .then(res=> res.json())
-    .then(data=> {
-    if(data.insertedId){
-        Swal.fire({
-            title: 'Success!',
-            text: 'Added Successfully',
-            icon: 'success',
-            confirmButtonText: 'Cool'
-          }) 
-      
-          setAdd(false)
-        
-    }})
-    }
-    const handleDelete = (_id) => {
-        Swal.fire({
-          title: "Are you sure?",
-          text: "You won't be able to revert this!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes, delete it!",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            fetch(`https://car-hunt-server-side-fy1tbiv9m-shahriaranuvab.vercel.app/cars/${_id}`, {
-              method: "DELETE",
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                if (data.deletedCount> 0) {
-                  Swal.fire("Deleted!", "Your Car has been deleted.", "success");
-    
-                }
-                const remaining = cars.filter(item => item._id !== _id)
-                setCars(remaining)
-    
-         
-              });
-          }
-        });
-    }
-    return (
-        <div>
-              <div className="card lg:card-side bg-base-100 shadow-xl gap-10 my-10">
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Success!",
+            text: "Added Successfully",
+            icon: "success",
+            confirmButtonText: "Cool",
+          });
+
+          setAdd(false);
+        }
+      });
+  };
+  const handleDelete = (_id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/cars/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              Swal.fire("Deleted!", "Your Car has been deleted.", "success");
+            }
+            const remaining = cars.filter((item) => item._id !== _id);
+            setCars(remaining);
+          });
+      }
+    });
+  };
+  return (
+    <div>
+      <div className="card lg:card-side bg-base-100 shadow-xl gap-10 my-10">
         <figure className=" shadow-xl ">
           <img src={image} alt="car" className="w-[500px] h-[300px]" />
         </figure>
@@ -71,6 +80,7 @@ const Products = ({car, cars, setCars}) => {
           <h2 className="card-title">{category}</h2>
           <h2 className="card-title"> ${price}</h2>
           <p>{description}</p>
+          <p className="text-red-500"> {userEmail}</p>
           <div>
             <Rating
               emptySymbol={
@@ -114,11 +124,16 @@ const Products = ({car, cars, setCars}) => {
                   Add To Cart
                 </button>
               ) : (
-                <button className="btn w-[150px] "  onClick={()=> Swal.fire("", "Already Added.", "success")}>Added</button>
+                <button
+                  className="btn w-[150px] "
+                  onClick={() => Swal.fire("", "Already Added.", "success")}
+                >
+                  Added
+                </button>
               )}
               <button
                 className="btn w-[150px]"
-                onClick={()=>handleDelete(_id)}
+                onClick={() => handleDelete(_id)}
               >
                 {" "}
                 Delete
@@ -131,14 +146,12 @@ const Products = ({car, cars, setCars}) => {
           </div>
         </div>
       </div>
-            
-        </div>
-    );
+    </div>
+  );
 };
 Products.propTypes = {
-    car: PropTypes.object,
-    cars: PropTypes.array,
-    setCars: PropTypes.func,
- 
-  };
+  car: PropTypes.object,
+  cars: PropTypes.array,
+  setCars: PropTypes.func,
+};
 export default Products;

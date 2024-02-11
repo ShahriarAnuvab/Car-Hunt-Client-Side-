@@ -3,18 +3,19 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Auth Provider/AuthProvider";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const LogIn = () => {
-  const {signIn, googleLogIn} = useContext(AuthContext)
-  const location = useLocation()
-  const navigate = useNavigate()
+  const { signIn, googleLogIn } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const handleGoogleLogIn = ()=>{
+  const handleGoogleLogIn = () => {
     googleLogIn()
-    .then(result=>toast.success("Successfully Login"))
-    .catch(err => toast.error("error occured"))
-    navigate(location.state? location.state : "/")
-  }
+      .then((result) => toast.success("Successfully Login"))
+      .catch((err) => toast.error("error occured"));
+    navigate(location.state ? location.state : "/");
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -24,15 +25,23 @@ const LogIn = () => {
     const password = form.get("password");
     // console.log(email, password);
     signIn(email, password)
-    .then(result => {
-      toast.success("Successfully Login")
-      navigate(location.state? location.state : "/")
-      
-    })
-    .catch(err => {
-      toast.error("User Not Valid")
-
-    })
+      .then((result) => {
+        const loggedInUser = result.user;
+        const user = { email };
+        console.log(loggedInUser);
+        axios
+          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .then((res) => {
+            if (res.data.success) {
+              toast.success("Successfully Login");
+              navigate(location.state ? location.state : "/");
+              console.log(res.data.success);
+            }
+          });
+      })
+      .catch((err) => {
+        toast.error("User Not Valid");
+      });
   };
   return (
     <div>
@@ -80,7 +89,10 @@ const LogIn = () => {
               <button className="btn outline-none border-none">Login</button>
             </div>
             <div className=" mt-6 flex ">
-              <button className="btn  text-white  outline-none border-none" onClick={handleGoogleLogIn}>
+              <button
+                className="btn  text-white  outline-none border-none"
+                onClick={handleGoogleLogIn}
+              >
                 {" "}
                 <FcGoogle></FcGoogle>{" "}
               </button>

@@ -8,19 +8,19 @@ import HomeCar from "./Home Car/HomeCar";
 
 const Home = () => {
   const data = useLoaderData();
-  const [brand, setBrand] = useState([])
+  const [brand, setBrand] = useState([]);
 
-  useEffect(()=>{
-    fetch('https://car-hunt-server-side-fy1tbiv9m-shahriaranuvab.vercel.app/brand')
-    .then(res => res.json())
-    .then(data=> setBrand(data))
-  },[])
+  useEffect(() => {
+    fetch("http://localhost:5000/brand")
+      .then((res) => res.json())
+      .then((data) => setBrand(data));
+  }, []);
 
   const brandData = {};
   brand.forEach((item) => {
     const brand = item.brand;
     const image = item.brandImage;
-   
+
     if (!brandData[brand]) {
       brandData[brand] = {
         brand: brand,
@@ -38,17 +38,23 @@ const Home = () => {
       </div>
       <div>
         <h1>Brands: {brandArray.length}</h1>
-        <div color className="grid md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-5 my-5">
-          {brandArray.map((brand, index) => <HomeCar key={index} brands={brand}></HomeCar>)}
+        <div
+          color
+          className="grid md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-5 my-5"
+        >
+          {brandArray.map((brand, index) => (
+            <HomeCar key={index} brands={brand}></HomeCar>
+          ))}
         </div>
       </div>
 
-      
-      <div className="shadow-lg rounded-xl p-2 mt-2">
+      {/* <div className="shadow-lg rounded-xl p-2 mt-2">
         <h1>Added Cars: {data.length}</h1>
         {data.length === 0 ? (
           <div className="flex justify-center items-center text-3xl">
-            <Link to="/addproduct"><h1 className="my-5">Haven't Added Yet?</h1></Link>
+            <Link to="/addproduct">
+              <h1 className="my-5">Haven't Added Yet?</h1>
+            </Link>
           </div>
         ) : (
           data
@@ -61,16 +67,19 @@ const Home = () => {
           ""
         ) : (
           <div className="flex justify-center items-center">
-            {data.length > 0?   <Link to="/addedproduct">
-              <button className="btn mt-5">See All</button>
-            </Link> : '' }
-          
+            {data.length > 0 ? (
+              <Link to="/addedproduct">
+                <button className="btn mt-5">See All</button>
+              </Link>
+            ) : (
+              ""
+            )}
           </div>
         )}
       </div>
       <div className="my-10">
         <ContactUs></ContactUs>
-      </div>
+      </div> */}
       <div>
         <Footer></Footer>
       </div>

@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 const CartItems = ({ item, setCartItem, cartItem }) => {
-
   const handleDelte = (_id) => {
     console.log(_id);
     Swal.fire({
@@ -14,7 +13,7 @@ const CartItems = ({ item, setCartItem, cartItem }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://car-hunt-server-side-fy1tbiv9m-shahriaranuvab.vercel.app/cart/${_id}`, {
+        fetch(`http://localhost:5000/cart/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -40,6 +39,7 @@ const CartItems = ({ item, setCartItem, cartItem }) => {
 
           <h2 className=""> ${item.price}</h2>
           <h2 className="">{item.description}</h2>
+          <p className="text-red-500">{item.userEmail}</p>
           <div className="flex justify-end">
             <button onClick={() => handleDelte(item._id)} className="btn">
               Delete
